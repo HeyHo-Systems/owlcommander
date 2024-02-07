@@ -1,0 +1,32 @@
+<div class="table-row cursor-pointer"
+     data-controller="rowclick"
+     data-row-href="<%= account_conversations_path(@account, search:  @search_params.merge(selected: conversation.id)) %>"
+     data-selected="<%= @selected.id == conversation.id %>"
+    id="<%= dom_id conversation %>">
+  <div class="table-cell "> 
+    <%= format_time(conversation.date_created) %>  
+      <br/><span class="<%= conversation.date_created.today? ? 'text-black font-bold ':'text-gray-500' %>">
+        <%= highlight(format_date(conversation.date_created), search.terms) %>
+      </span> 
+  </div> 
+
+  <div class="table-cell">
+    <span class="<%= conversation.state == 'active'  ? ' text-green-800 font-bold ':'' %>">
+        <%= highlight(conversation.state, search.terms) %>
+    </span>
+  </div>
+  <div class="table-cell">
+        <%= highlight(conversation.friendly_name, search.terms) %>
+  </div>
+
+
+  <div class="table-cell">
+    <%=  conversation.messages_count %>
+  </div>
+  <div class="table-cell ">
+    <span class="square" style="color:<%= conversation.twilio_account.color %>">■</span>
+    <%= highlight(conversation.twilio_account.name, search.terms) %>
+    <div class="text-xs text-gray-500 text-xxs "><%= link_to highlight(conversation.sid, search.terms), twilio_conversation_url(conversation), target: "_blank" ,title:'Open call in twilio'%></div>
+  </div>
+
+</div>

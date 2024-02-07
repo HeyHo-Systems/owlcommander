@@ -1,0 +1,57 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t "hello"
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t("hello") %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   "true": "foo"
+#
+# To learn more, please read the Rails Internationalization guide
+# available at https://guides.rubyonrails.org/i18n.html.
+
+en:
+  team:
+    created: "Your new team has been created"
+    detroyed: "Team has been deleted"
+    renamed: "Team has been renamed"
+    failed_to_rename: "Team renaming failed, maybe that name is already taken"
+    duplicate_exists: "There's already a team with that name"
+    members:
+      add_user_title: "Add someone to the team"
+      existing_user_added: "%{user} was added to the team %{team} "
+      created_user_added: "%{user} was invited to Owl commander and added to the team %{team}"
+      already_a_member: "%{user} is already in the team %{team}"
+    twilio_accounts:
+      import_title: "Import Twilio account"
+      skipped_import: "This account was already connected"
+      imported: "Twilio account connected"
+      disconnected: Twilio account disconnected
+      renamed: The Twilio account has been renamed
+      rename_failed: The Twilio account could not be renamed
+  user:
+    no_change: No update to apply
+    updated: User has been updated
+    update_failed: User could not be updated
+    destroyed: Account destroyed
+  feeback:
+    thanks: Thank you for your feedback

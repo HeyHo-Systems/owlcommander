@@ -1,0 +1,29 @@
+<%= turbo_frame_tag "live-reloading-content", 'data-turbo-action' => "advance" do %>
+  <% if @numbers.empty? %>
+    <div class="nothing-here">No result</div>
+  <% else %>
+
+    <% if @search.terms.any? %>
+      <div class="py-4 px-1">Found <%= @total_numbers_searched %> results</div>
+    <% end %>
+    <div class="">
+      <div class="table full striped">
+        <div class="table-header-group">
+          <div class="table-row">
+            <div class="table-cell"><%= sortable_header(:phone, label: 'Number', search: search) %></div>
+            <div class="table-cell"><%= sortable_header(:name, label: 'Name', search: search) %></div>
+
+
+            <div class="table-cell"><%= sortable_header(:'voice_url', label: 'Voice URL', search: search) %></div>
+            <div class="table-cell"><%= sortable_header(:'twilio_accounts.name', label: 'Account & SID', search: search) %></div>
+          </div>
+        </div>
+        <div class="table-row-group" id="numbers-rows">
+          <%= render partial: 'numbers/number', collection: @numbers, locals: { search: search } %>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/infinite_scrolling', pagy: @pagy %>
+  <%- end %>
+<%- end %>

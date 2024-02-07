@@ -1,0 +1,406 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container {
+    @apply overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg;
+}
+
+.text-xxs {
+    font-size: 0.625rem;
+    line-height: 0.875rem;
+}
+
+a {
+    @apply text-sky-500 hover:text-sky-700;
+}
+
+a.drop-down {
+    @apply block px-4 py-2 text-sm text-gray-700 hover:text-sky-500;
+}
+
+a.drop-down-mobile {
+    @apply block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100;
+}
+
+table.full, .table.full {
+    @apply min-w-full divide-y divide-gray-300;
+}
+
+.table.full {
+    @apply table-auto border-collapse;
+}
+
+.table.full .table-cell {
+    @apply border-b border-gray-200 align-middle;
+}
+
+table.striped tr:nth-child(even), .table.striped .table-row:nth-child(even) {
+    @apply bg-gray-100;
+}
+
+table.full thead, .table.full .table-header-group {
+    @apply bg-gray-50;
+}
+
+table.full tbody, .table.full .table-row-group {
+    @apply divide-y divide-gray-200 bg-white;
+}
+
+table.full th, .table.full .table-header-group .table-cell {
+    @apply px-3 py-3.5 text-left text-sm font-semibold text-gray-900;
+}
+
+table.full thead th:first-of-type,
+table.full tbody td:first-of-type,
+.table.full .table-header-group .table-cell:first-of-type,
+.table.full .table-row-group .table-cell:first-of-type {
+    @apply sm:pl-6;
+}
+
+table.full td, .table.full .table-row-group .table-cell {
+    @apply px-3 py-4 text-sm text-gray-500;
+}
+
+form.inline-form input[type="text"], form.inline-form select {
+    @apply border border-gray-300 rounded mt-1 px-4 h-12 w-11/12 focus:outline-none focus:ring-sky-500 focus:border-sky-500;
+}
+
+input::placeholder {
+    @apply text-gray-400;
+}
+
+form.form {
+    @apply space-y-6;
+}
+
+form.form label {
+    @apply block text-sm font-medium text-gray-700;
+}
+
+form.form input[type="checkbox"] + label {
+    @apply ml-2 block text-sm text-gray-900;
+}
+
+form.form input[type="text"], form.form input[type="email"], form.form input[type="password"] {
+    @apply appearance-none block w-full mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm;
+}
+
+form.form input[type="checkbox"] {
+    @apply h-4 w-4 text-sky-600 focus:ring-sky-500 border-gray-300 rounded;
+}
+
+form.form input[type="submit"] {
+    @apply button-default;
+}
+
+.button-default {
+    @apply inline-flex items-center justify-center rounded-md border border-transparent bg-sky-500 px-4 py-3 font-bold
+    text-white shadow-sm hover:hover:bg-sky-700 hover:text-white focus:outline-none focus:ring-2
+    focus:ring-sky-500 focus:ring-offset-2 sm:w-auto;
+}
+
+.button-danger { 
+    @apply inline-flex items-center justify-center rounded-md border border-transparent bg-red-500 px-4 py-3 font-bold
+    text-white shadow-sm hover:hover:bg-red-700 hover:text-white focus:outline-none focus:ring-2
+    focus:ring-red-500 focus:ring-offset-2 sm:w-auto;
+}
+
+.sort-label.sort-asc.sort-active:before {
+    content: "▲ ";
+}
+
+.sort-label.sort-desc.sort-active:before {
+    content: "▼ ";
+
+}
+
+/*The code below is quite hacky, we space all rows by 20px, and then add white box shadows to make groups appear as one
+block. But it works, while keeping the table layout*/
+
+.table.full.grouped {
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.table.full.grouped .table-cell {
+    border: none;
+    padding: 5px;
+}
+
+.table.full.grouped div[data-follower="false"] .table-cell:first-child {
+    border-top-left-radius: 10px;
+}
+
+.table.full.grouped div[data-follower="false"] .table-cell:last-child {
+    border-top-right-radius: 10px;
+}
+
+.table.full.grouped div[data-followed="false"] .table-cell:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+.table.full.grouped div[data-followed="false"] .table-cell:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+.table.full.grouped div[data-follower="true"] {
+    box-shadow: 0 -10px 0 white;
+}
+
+.table.full.grouped div[data-followed="true"] .table-cell {
+    padding-bottom: 0;
+}
+
+.table.full.grouped div[data-follower="true"] .table-cell {
+    padding-top: 0;
+}
+
+.table.full.grouped div[data-new="true"] {
+    background-color: #ffff5b;
+
+}
+
+body {
+    /*Force the scrollbar to allways show, even if page content is small, to avoid the layout shift when searching*/
+    overflow-y: scroll;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+form.centered {
+    max-width: 400px;
+    margin: 50px auto;
+    /*padding: 20px ;*/
+}
+
+.conversations .table-row-group .table-row {
+    background: #f3f4f6;
+
+}
+
+.conversations .table-row-group .table-row[data-selected="true"] {
+    background: #fff;
+    box-shadow: 1px 0 0 white;
+    z-index: 1;
+    position: relative;
+}
+
+.messages-list {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 350px;
+    background: white;
+    padding: 20px;
+}
+
+.nothing-here {
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.5;
+}
+
+#user-menu-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px;
+    font-weight: 500;
+    font-size: .875rem;
+    line-height: 1.25rem;
+}
+
+#user-menu-button:not(:hover):not(:focus) {
+    color: rgb(107, 114, 128);
+}
+
+
+nav#main-navigation {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+
+    & > * {
+        display: inline-flex;
+    }
+
+    @media (max-width: 800px) {
+        flex-direction: column;
+        height: auto;
+        & > * {
+            display: flex;
+        }
+
+        & .navlink,
+        & .drop-down-button {
+            flex-grow: 1;
+        }
+    }
+
+    & > * {
+        min-height: 64px;
+    }
+
+    & .logo {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        padding-right: 10px;
+        @media (max-width: 800px) {
+            display: none;
+        }
+
+        & img {
+            width: 40px;
+            height: 40px;
+        }
+    }
+
+    & .navlink,
+    & .drop-down-button {
+        padding: 15px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom: 2px solid transparent;
+        color: #333;
+        font-size: 14px;
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.02);
+        }
+    }
+
+    & > .spacer {
+        flex-grow: 1;
+        @media (max-width: 800px) {
+            display: none;
+        }
+    }
+}
+
+
+nav#main-navigation a.navlink.active {
+    @apply text-sky-700 border-sky-500;
+
+}
+
+
+nav#main-navigation .menu {
+    position: absolute;
+    background: white;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    z-index: 50;
+    top: 64px;
+
+    & > * {
+        white-space: nowrap;
+        display: flex;
+        padding: 10px;
+        justify-content: space-between;
+        max-width: 250px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &.left {
+        right: 0;
+    }
+
+    &.right {
+        left: 0;
+    }
+
+    font-size: .875rem;
+
+    > * {
+        display: flex;
+        padding: 15px;
+        align-items: center;
+        justify-content: space-between;
+
+    }
+
+    color: #333;
+
+    & a {
+        color: inherit;
+
+        &:hover:not(.active) {
+            background: rgba(0, 0, 0, 0.02);
+        }
+    }
+
+    > *.active {
+        @apply bg-sky-500;
+        color: white;
+    }
+
+
+}
+
+
+.session-box{
+    min-height: 100vh;
+    display:grid; 
+
+    & #presentation h2{
+        margin-top: 50px;
+        text-align: center;
+    }
+    & #presentation p{
+        opacity: 0.5; 
+    font-size: .875rem;
+    line-height: 1.25rem;
+    }
+}
+
+@media screen and (min-width: 1000px) and (min-height:600px){
+    .session-box{
+    & #signup-login-form{
+        position: fixed;
+        right: 0;
+        left: 50%;
+        top: 50%;
+        transform: translate(0,-50%);
+        margin: auto;
+        max-width: 450px;
+
+    }
+    & #presentation{
+        margin-right: 50%;
+    }
+}
+
+}
+
+
+
+.tab-preview{ 
+    max-width: 500px; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+
+   & video{grid-area:video; }
+   & h1{grid-area:h1; font-size:1.5em }
+   & p  {grid-area: p; opacity: 0.5} 
+}
+
+a.feedback {
+    position: fixed;
+    left: 0;
+    top: 50vh;
+    background: #0ea5e9;
+    color: white;
+    transform-origin: top left;
+    transform: translate(24px,0) rotate(90deg);
+    padding: 0 11px;
+}

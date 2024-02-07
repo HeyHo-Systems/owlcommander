@@ -1,0 +1,44 @@
+<%= form_for(@twilio_account, url: account_twilio_accounts_path(@account), html: { 'data-turbo': 'false', class: 'form ' ,style: "max-width:850px; margin:auto;"}) do |f| %>
+    <h1 class="text-xl font-normal text-gray-900 leading-tight ">
+      Add new account
+    </h1>
+  <div style="display: flex; flex-wrap: wrap;gap:50px">
+    <div style="flex-basis: 400px;">
+       <p  class="mt-6">In <a href="https://www.twilio.com/console/projects/summary" target="_blank">the Twilio console</a>, click the account name, then scroll down to the "Account info" accordion. You will find the Account SID and the Authentication Token for the us1 region.</p>
+
+    <p class="mt-6">If your account uses Twilio regions, click "account" at the top right of the Twilio console, "API keys & tokens", select the region in the top right, then scroll down to "Auth Tokens - [your region]", copy the account SID, and click the eye icon to see the region-specific authentication token</p>  
+  
+    <p class="mt-6">The authentication token will be used to generate an API key for Owl Commander and then forgotten for security reasons.</p>  
+  
+    </div>
+    <div style="flex-basis: 400px;">
+
+  <div class="mt-6">
+    <%= f.label :account_sid, 'Account SID' %>
+    <%= f.text_field :account_sid, required: true, autocomplete: false %>
+    <%= field_errors @twilio_account.errors[:account_sid] %>
+  </div>
+
+  <div class="mt-6">
+    <%= f.label :auth_token %>
+    <%= f.password_field :auth_token, required: true, autocomplete: false %>
+    <%= field_errors @twilio_account.errors[:auth_token] %>
+  </div>
+
+  <div class="mt-6">
+    <%= f.label :region %>
+    <label class="p-2"><%= f.radio_button :region, 'us1' %> Default region - us1 (recommended) </label>
+    <label class="p-2"><%= f.radio_button :region, 'ie1' %> Ireland - ie1</label>
+    <label class="p-2"><%= f.radio_button :region, 'au1' %> Australia - au1</label>
+    <%= field_errors @twilio_account.errors[:region] %>
+  </div>
+
+    </div>
+    
+  </div>
+ 
+  <div class="flex justify-between items-center"> 
+    <%= link_to '‹ cancel', account_path(@account) %>
+    <%= f.submit 'Add Twilio account' %>
+  </div>
+<% end %>

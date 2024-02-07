@@ -1,0 +1,12 @@
+
+<% if @account.twilio_accounts.empty? %>  
+	<div class="tab-preview">
+    	<video width="1920" height="1080" controls  class="my-3"><source src="/videos/3.mp4" type="video/mp4"></video>
+		<h1>You don't have any phone number yet</h1> 
+        <p><%= link_to "Connect a twilio account", new_account_twilio_account_path(@account) %> to see your twilio numbers here</p>
+	</div>
+<% else %>
+	<%= render 'shared/search',  placeholder: 'Search for Phone Number, Name, Voice URL or SID' %>
+	<%= render 'numbers/numbers', numbers: @numbers, search: @search %>
+<%- end %>
+

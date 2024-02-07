@@ -1,0 +1,12 @@
+<turbo-stream action="update" target="pagination">
+  <template>
+    <%= pagy_nav(@pagy).html_safe %>
+  </template>
+</turbo-stream>
+
+<turbo-stream action="update" target="items">
+  <template>
+    <%= @pagy.page * @pagy.items %>
+  </template>
+</turbo-stream>
+  

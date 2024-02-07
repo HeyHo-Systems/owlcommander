@@ -1,0 +1,27 @@
+
+
+<%= form_for(@user, url: account_users_path(@account), html: { 'data-turbo': 'false', class: 'form centered' }) do |f| %>
+ <h1 class="text-xl font-normal text-gray-900 leading-tight ">
+    New member
+  </h1>
+
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name, autofocus: true %>
+    <%= field_errors @user.errors[:name] %>
+  </div>
+
+  <div>
+    <%= f.label :email %>
+    <%= f.email_field :email, autocomplete: "none", required: true %>
+    <%= field_errors @user.errors[:email] %>
+    <p class="text-xs text-gray-800 pt-0.5">If there's already a user with that email we'll immediately add them to your
+      team.</p>
+  </div>
+
+  <div class="flex justify-between items-center">
+    <%= link_to "‹ cancel", account_path(@account) %>
+
+    <%= f.submit "Create user", class: "button-primary" %>
+  </div>
+<% end %>

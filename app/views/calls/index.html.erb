@@ -1,0 +1,12 @@
+<% if @account.twilio_accounts.empty? %>  
+	<div class="tab-preview">
+		<video width="1920" height="1080" controls  class="my-3"><source src="/videos/2.mp4" type="video/mp4"></video> 
+		<h1>You don't have any call yet</h1>       
+		<p><%= link_to "Connect a twilio account", new_account_twilio_account_path(@account) %> to see your calls here</p>
+
+	</div>
+<% else %>
+	<%= render 'shared/search',  placeholder: 'Search for Phone Number, Call Duration, Conference, Account or SID' %>
+	<%= render 'calls/calls', calls: @calls, search: @search %>
+<%- end %>
+

@@ -1,0 +1,7 @@
+<turbo-stream action="<%= action_for_page(@pagy) %>" target="alerts-rows">
+  <template>
+    <%= render partial: 'alerts/alert', collection: @alerts, locals: { search: @search }, formats: [:html] %>
+  </template>
+</turbo-stream>
+
+<%= render 'shared/infinite_scrolling' %>

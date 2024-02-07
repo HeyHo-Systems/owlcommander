@@ -1,0 +1,166 @@
+
+
+ <header  >
+    <h1 class="text-xl font-normal text-gray-900 leading-tight ">
+      Twilio Accounts
+    </h1>
+
+  <%- if policy(@account.twilio_accounts.new).new? %>
+    <%= link_to "Add account", new_account_twilio_account_path(@account),
+                class: "button-default"  %>
+  <% end %>
+</header>
+
+
+<%- if @twilio_accounts.empty? %>
+
+  <div class="nothing-here"> You haven't connected any Twilio accounts yet</div>
+
+<%- else @twilio_accounts.present? %>
+    <table class="full">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col" title="Status of the twilio account data update. Can be running, done or error.">Status</th>
+          <th scope="col" title="Last time we tried to update the data of the twilio account.">Started</th>
+          <th scope="col" title="The time at which our last update finished">Ended</th>
+          <th scope="col">Calls</th>
+          <th scope="col" title="Twilio numbers">Num</th>
+          <th scope="col">Alerts</th>
+          <th scope="col" title="Flex Conversations">Conv.</th>
+          <th scope="col">SID</th>
+          <th scope="col">Region</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%- @twilio_accounts.each do |twilio_account| %>
+          <tr>
+            <td> 
+             <span class="square" style="color:<%= twilio_account.color %>">■</span>
+              <%= link_to twilio_account.name, edit_account_twilio_account_path(@account, twilio_account) %>
+            </td>
+            <td style="min-width: 80px;"><%= twilio_account.last_pull_status %></td> 
+            <td><%=  format_time(twilio_account.last_pull_start)  %></td>
+            <td><%=  format_time(twilio_account.last_pull_end)  %></td>
+            <td><%= twilio_account.calls.count %></td>
+            <td><%= twilio_account.numbers.count %></td>
+            <td><%= twilio_account.alerts.count %></td>
+            <td><%= twilio_account.conversations.count %></td>
+            <td><%= twilio_account.account_sid %></td>
+            <td><%= twilio_account.region %></td>
+
+            <td><%= if policy(twilio_account).destroy? then  link_to "Delete", account_twilio_account_path(@account, twilio_account), 
+                          class:"text-red-700",
+                            data: { "turbo-method": :delete, "turbo-confirm": "Are you sure you want to delete #{twilio_account.name}?" } end%></td>
+          </tr>
+        <%- end %>
+      </tbody>
+    </table>
+<% end %>
+
+<div style="display: flex; flex-wrap: wrap; gap:50px;margin-top:50px;">
+  <div style="flex-basis:500px; flex-grow:1">
+
+
+<header>
+  <h1 class="text-xl font-normal text-gray-900 leading-tight ">
+    Team Members
+  </h1>
+  <%- if policy(@account.memberships.new).create? %>
+    <%= link_to "Add member", new_account_user_path(@account), class: "button-default" %>
+  <%- end %>
+</header>
+
+<table class="full">
+    <thead>
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Joined the team</th>
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%- @users.each do |user| %>
+        <tr>
+        <td class="font-medium">
+          <%=  if policy(user).edit?
+          then
+            link_to(user.name, edit_user_path(user))
+            else
+            user.name 
+          end
+          %>
+            
+        </td>
+        <td><%= user.email %></td>
+        <td><%= distance_of_time_in_words_to_now(user.membership_of(@account).created_at )%> ago</td>
+
+        <td>
+
+            <%= 
+              if  policy(user.membership_of(@account)).destroy? then
+            button_to("Remove",
+                        account_membership_path(@account, user.membership_of(@account)),
+                          class:"text-red-700",
+                          title:"This will remove the user from the team. ",
+                           method: :delete,
+                           form: {
+                             'data-controller':'confirm',
+                             'data-turbo': 'false',
+                             'data-confirm-message-value':"Are you sure that you want to remove #{user.name_or_email} from team #{@account.name}?"
+                           })
+          end
+            %>
+        </td>
+        </tr>
+    <%- end %>
+    </tbody>
+</table>
+  </div>
+  <div style="flex-basis:500px; flex-grow:1"> 
+
+<%= form_for(@account, html: { 'data-turbo': 'false', class: 'form' }) do |f| %>
+<header style="margin: 0 !important;">
+  <h2 class="text-xl font-normal text-gray-900 leading-tight ">
+    Rename Team
+  </h1>
+  
+
+</header>
+ 
+
+
+  <div>
+    <%= f.label :name %>
+    <div class="flex gap-2">
+      <%= f.text_field :name, required: true, maxlength: 25 %>
+      <%= f.submit 'Save' %>   
+    </div>  
+  </div>
+  
+
+<% end %>
+
+ 
+
+  <%- if policy(@account).destroy? %>  
+    <h2 class="text-xl font-normal text-gray-900 leading-tight mt-10  mb-4">Delete Team</h2>
+     <p>
+      This team was created by <%=  @account.creator&.name || "[deleted]"%> (<%= @account.creator&.email  || "deleted"%>) on  <%= format_date(@account.created_at) %>. Deleting it will disconnect <%= @account.twilio_accounts.size %> twilio accounts, kick out <%= @account.memberships.size %> members, delete <%= @account.calls.size %> calls, <%= @account.numbers.size %> numbers,  <%= @account.conversations.size %> conversations and  <%= @account.alerts.size %> alerts. Your data will be left untouched in Twilio.
+    </p>
+    <%= button_to "Delete team",
+                    account_path(@account),
+                      class:"button-danger mt-4",
+                      title:"This will delete the team. ",
+                       method: :delete,
+                       form: {
+                         'data-controller':'confirm',
+                         'data-turbo': 'false',
+                         'data-confirm-message-value':"Are you sure that you want to delete the team #{@account.name}?"
+                       }
+        %>
+<%- end %>
+  </div>
+</div>

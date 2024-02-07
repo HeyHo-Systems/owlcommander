@@ -1,0 +1,6 @@
+<!--lets user filter results by twilio account they -->
+<% if @account.twilio_accounts.size > 1 %>
+  <%= select_tag "search[twilio_account_id]", options_from_collection_for_select([['', 'All twilio accounts']] + twilio_accounts_for_select, :first, :last, @search.twilio_account_id), id: 'twilio_account_id_select',
+                 class: 'basis-1/3', data: { action: 'search#search', 'turbo-permanent' => '' } %>
+
+<% end %>

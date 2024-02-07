@@ -1,0 +1,18 @@
+:max_retries: 0
+:scheduler:
+  :schedule:
+    update_lines:
+      every: '60s'
+      class: UpdateLinesFromTwilioJob
+    fetch_apps:
+      every: '60s'
+      class: FetchAppsFromTwilioJob
+    fetch_calls:
+      every: '10s'
+      class: FetchCallsFromTwilioJob
+    fetch_alerts:
+      every: '30s'
+      class: FetchAlertsFromTwilioJob
+    fetch_function_logs:
+      every: '30s'
+      class: FetchFunctionLogsFromTwilioJob

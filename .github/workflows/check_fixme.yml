@@ -1,0 +1,20 @@
+name: Look for todos and fixmes
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+         if grep --exclude-dir={.git,.github,node_modules,vendor,tmp} -rE "T[O]DO|F[I]XME"; then
+              exit 1
+         else
+             echo "All good"
+         fi
+
+

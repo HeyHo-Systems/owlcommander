@@ -1,0 +1,19 @@
+name: 'AI Code Reviewer'
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  code-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: gvasilei/AutoReviewer@0.4
+        env:
+          NODE_OPTIONS: '--experimental-fetch'
+        with:
+          model_name: 'gpt-4'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          openai_api_key: ${{ secrets.OPENAI_API_KEY }}
+          exclude_files: '*.json, *.md, *.yml, *.yaml' # optionally exclude files based on a wildcard expression.

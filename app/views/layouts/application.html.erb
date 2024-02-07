@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html class="h-full bg-gray-100">
+<head>
+  <title><%= @title || @page_title || 'Welcome' %> &middot; Owl Commander</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= favicon_link_tag 'barn-owl.png' %>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+</head>
+
+<body class="h-full">
+<div class="min-h-full">
+
+  <%- if current_user.present? %>
+    <%= render 'shared/nav' %>
+  <%- end %>
+
+  <%- if current_user.present? && request.path != new_feedback_path && ENV['SLACK_FEEDBACK_URL']%>
+    <%= link_to 'Feedback', new_feedback_path, class: "feedback"%>
+  <%- end %>
+
+  <%= render 'shared/flash' %>
+
+
+  <main>
+    <div class="mx-auto px-6 py-6 lg:px-8 lg:py-8 max-w-screen-2xl ">
+      <%= yield %>
+    </div>
+  </main>
+</div>
+</body>
+</html>

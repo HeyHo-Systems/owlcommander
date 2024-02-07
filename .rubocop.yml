@@ -1,0 +1,27 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-discourse
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-factory_bot
+AllCops:
+  Exclude:
+    - 'bin/*'
+    - 'db/schema.rb'
+    - 'vendor/**/*'
+  NewCops: enable
+
+Discourse/NoAddReferenceOrAliasesActiveRecordMigration:
+  Enabled: false
+
+Metrics/AbcSize:
+  Exclude:
+    - 'db/**/*'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'db/**/*'
+
+Style/Documentation:
+  Enabled: false

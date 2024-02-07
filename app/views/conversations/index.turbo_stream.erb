@@ -1,0 +1,7 @@
+<turbo-stream action="<%= action_for_page(@pagy) %>" target="conversations-rows">
+  <template>
+    <%= render partial: 'conversations/conversation', collection: @conversations, locals: { search: @search }, formats: [:html] %>
+  </template>
+</turbo-stream>
+
+<%= render 'shared/infinite_scrolling' %>

@@ -1,0 +1,22 @@
+<div class="search-bar relative" data-controller="search">
+  <%= form_for(:search, html: { class: 'inline-form', method: :get, data: { 'turbo-frame':'live-reloading-content', 'search-target': 'form' } }) do |f| %>
+    <div class="flex flex-row mb-6 lg:mb-8 gap-6 lg:gap-8">
+
+        <%= f.text_field :search_all, placeholder: placeholder, autofocus: true, autocomplete: 'off', class:"basis-2/3 grow", data: { action: 'input->search#search'   ,'search-target':"input"} %>
+
+        <%= render 'shared/account_select' %>
+        <%= f.submit "Search", class: 'button-default absolute top-2 -right-24', data: { 'search-target': 'submit' }, id:'submitbtn' %>
+        <button
+          role="switch"
+          style="min-width:96px"
+          class="button-default" data-search-target="toggle"
+          data-action="click->search#toggleRefresh">Pause</button>
+    </div>
+
+    <input type="hidden" name="items" value="<%= item_limit(@pagy) %>">
+    <input type="hidden" name="search[sort_field]" value="<%= @search.sanitized_sort_field%>">
+    <input type="hidden" name="search[sort_dir]" value="<%= @search.sanitized_sort_dir%>">
+    <%= yield %>
+  <%- end %>
+</div>
+

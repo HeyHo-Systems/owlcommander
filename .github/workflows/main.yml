@@ -1,0 +1,65 @@
+name: "Tests"
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  rspec:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:14-alpine
+        ports:
+          - "5432:5432"
+        env:
+          POSTGRES_DB: owl
+          POSTGRES_USER: rails
+          POSTGRES_PASSWORD: password
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: "postgres://rails:password@localhost:5432/owl"
+      ENCRYPTION_PRIMARY_KEY: ${{secrets.ENCRYPTION_PRIMARY_KEY}}
+      ENCRYPTION_DETERMINISTIC_KEY: ${{secrets.ENCRYPTION_DETERMINISTIC_KEY}}
+      ENCRYPTION_KEY_DERIVATION_SALT: ${{secrets.ENCRYPTION_KEY_DERIVATION_SALT}}
+      SENDGRID_API_KEY: ""
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@8029ebd6e5bd8f4e0d6f7623ea76a01ec5b1010d # v1.110
+        with:
+          bundler-cache: true 
+      - name: Set up database schema
+        run: bin/rails db:schema:load
+      - name: Compile assets
+        run: bin/rails css:build javascript:build
+
+      - name: Run rspec
+        run: bin/rails spec 
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@8029ebd6e5bd8f4e0d6f7623ea76a01ec5b1010d # v1.110
+        with:
+          bundler-cache: true
+      - name: Security audit dependencies
+        run: bin/bundler-audit --update
+      - name: Security audit application code
+        run: bin/brakeman -q -w2
+
+  rubocop:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@8029ebd6e5bd8f4e0d6f7623ea76a01ec5b1010d # v1.110
+        with:
+          bundler-cache: true
+      - name: Run Rubocop
+        run: bin/rubocop --parallel

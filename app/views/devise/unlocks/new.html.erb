@@ -1,0 +1,18 @@
+<%- content_for :under_box do %>
+  <%= render "devise/shared/links" %>
+<%- end %>
+
+<%= render 'shared/session_box', title: 'Resend unlock instructions' do %>
+<%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post, class: 'form', 'data-turbo': 'false' }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div>
+      <%= f.label :email %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
+    </div>
+
+    <div>
+      <%= f.submit 'Resend unlock instructions' %>
+    </div>
+  <% end %>
+<% end %>

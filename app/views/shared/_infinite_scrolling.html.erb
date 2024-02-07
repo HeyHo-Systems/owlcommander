@@ -1,0 +1,7 @@
+<div data-controller="infinite-scroll">
+  <div data-infinite-scroll-target="scrollArea"></div>
+
+  <div id="pagination" data-infinite-scroll-target="pagination">
+    <%= pagy_nav(pagy).html_safe %>
+  </div>
+</div>

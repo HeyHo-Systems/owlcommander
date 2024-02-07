@@ -1,0 +1,32 @@
+<%= turbo_frame_tag "live-reloading-content", 'data-turbo-action' => "advance" do %>
+  <% if @function_logs.empty? %>
+    <div class="nothing-here">No result</div>
+  <% else %>
+
+
+    <% if @search.terms.any? %>
+      <div class="py-4 px-1">Found <%= @total_searched_function_logs %> results</div>
+    <% end %>
+    <div class="">
+      <div class="table full striped">
+        <div class="table-header-group">
+          <div class="table-row">
+            <div class="table-cell"><%= sortable_header(:date_created, label: 'Time', search: @search) %></div>
+            <div class="table-cell"><%= sortable_header(:message, label: 'Message', search: @search) %></div>
+            <div class="table-cell"><%= sortable_header(:level, label: 'Level', search: @search) %></div>
+            <div class="table-cell"><%= sortable_header(:service_name, label: 'Service', search: @search) %></div>
+            <div class="table-cell"><%= sortable_header(:function_name, label: 'Function', search: @search) %></div>
+            <% if !@search.twilio_account_id.present? %>
+              <div class="table-cell"><%= sortable_header(:'twilio_accounts.name', label: 'Account', search: @search) %></div>
+            <% end %>
+          </div>
+        </div>
+        <div class="table-row-group" id="function_logs-rows">
+          <%= render partial: 'function_logs/function_log', collection: @function_logs, locals: { search: @search } %>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/infinite_scrolling', pagy: @pagy %>
+  <%- end %>
+<%- end %>

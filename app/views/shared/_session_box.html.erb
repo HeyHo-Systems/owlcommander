@@ -1,0 +1,40 @@
+<div class="session-box">
+  <div id="signup-login-form">
+    <div >
+      <%= image_tag "barn-owl.png", class: "mx-auto h-12 w-auto", alt: "Owl Commander" %>
+      <h1 class="mt-6 text-center text-3xl font-extrabold text-gray-900"><%= title %></h2>
+    </div>
+
+    <div class="mt-8">
+      <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <%= yield %>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="presentation">
+    <h2 class="mt-6 text-xl font-extrabold text-gray-900">Welcome to Owl commander</h2>
+    <video width="1920" height="1080" controls  class="my-3"><source src="/videos/1.mp4" type="video/mp4"></video>
+    <p>This is a third-party administration UI for Twilio. To get started, create an account, create a team, invite colleagues and connect a Twilio account</p>
+  
+    <h2 class="mt-6 text-xl font-extrabold text-gray-900">The calls tab</h2>
+    <video width="1920" height="1080" controls  class="my-3"><source src="/videos/2.mp4" type="video/mp4"></video>
+    <p>A real-time view of your Twilio calls in a searchable and sortable table view.</p>
+  
+    <h2 class="mt-6 text-xl font-extrabold text-gray-900">The numbers tab</h2>
+    <video width="1920" height="1080" controls  class="my-3"><source src="/videos/3.mp4" type="video/mp4"></video>
+    <p>The phone numbers you own in Twilio, their voice URL and editable friendly name.</p>
+  
+   <h2 class="mt-6 text-xl font-extrabold text-gray-900">The conversations tab</h2>
+    <video width="1920" height="1080" controls  class="my-3"><source src="/videos/5.mp4" type="video/mp4"></video>
+    <p>Monitor your chat conversations, debug chatbots and quickly find mentions of specific words.</p>
+  
+   <h2 class="mt-6 text-xl font-extrabold text-gray-900">Multiple twilio accounts</h2>
+    <video width="1920" height="1080" controls  class="my-3"><source src="/videos/4.mp4" type="video/mp4"></video>
+    <p>No need to "switch account" in Owl Commander, we display the data of all your Twilio accounts in one table. </p>
+</div>
+
+
+  </div>
+</div>

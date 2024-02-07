@@ -1,0 +1,14 @@
+<%= form_for(@twilio_account, url: account_twilio_account_path(@account, @twilio_account), html: { 'data-turbo': 'false', class: 'form centered'}) do |f| %>
+  <h1 class="text-xl font-normal text-gray-900 leading-tight ">
+    Twilio account <%= @twilio_account.name %>
+  </h1>
+  <div>
+  <%= f.label :name %>
+  <%= f.text_field :name, autofocus: true, required: true %>
+  <p class="text-gray-900 text-xs pt-2">You can rename the account here. It will appear with the new name in Owl Commander. The friendly name in Twilio will not change. A team cannot have two Twilio accounts with the same name.</p>
+</div>
+  <div class="flex justify-between items-center"> 
+      <%= link_to 'cancel', account_path(@account) %>
+    <%= f.submit 'Save' %>
+  </div>
+<% end %>

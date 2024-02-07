@@ -1,0 +1,83 @@
+<div class="table-row" id="<%= dom_id call %>" data-follower="<%= call.follower %>" data-followed="<%= call.followed %>" data-new="<%= call.new? %>">
+<div class="table-cell ">
+<div class="text-gray-900   whitespace-nowrap">
+  <%= format_time(call.started_at) %> - <%= format_time(call.ended_at) %>
+  <br/><span class="<%= call.started_at.today? ? 'text-black font-bold ':'text-gray-500' %>">
+    <%= highlight(format_date(call.started_at), search.terms) %>
+  </span>
+</div>
+</div>
+  <div class="table-cell">
+    <div class="text-gray-900  text-base break-words">
+      <%- if call.from_app? %>
+        <%= highlight(call.from_app_name, search.terms) %>
+        <div class="text-gray-500 text-xs">
+          <%= highlight(call.from_phone, search.terms) %>
+          <span class="text-xs text-gray-500"><%= highlight(call.friendly_direction, search.terms) %></span>
+        </div>
+      <%- else %>
+        <%= highlight(call.from_phone, search.terms) %>
+        <div class="text-gray-500 text-xs"><%= highlight(call.friendly_direction, search.terms) %><%= call.from_number&.name %></div>
+      <%- end %>
+    </div>
+  </div>
+  <div class="table-cell">
+    <div class="text-gray-900  text-base break-words">
+      <%- if call.to_app? %>
+        <%= highlight(call.to_app_name, search.terms) %>
+        <div class="text-xs text-gray-500">
+          <%= highlight(call.to_phone, search.terms) %>
+        </div>
+      <%- else %>
+        <%= highlight(call.to_phone, search.terms) %>
+        <div class="text-xs text-gray-500"><%= highlight(call.to_number&.name.to_s, search.terms) %></div>
+      <%- end %>
+    </div>
+  </div>
+  <div class="table-cell ">
+    <div class="text-gray-900">
+      <%- if call.duration.present? %>
+        <%- if call.duration < 60 %>
+          <%= highlight(duration_in_words(call.duration), search.terms) %>
+        <%- else %>
+          <%= duration_in_words(call.duration) %>
+          <div class="text-xs text-gray-500 text-xxs"><%= highlight(call.duration.to_s, search.terms) %>s</div>
+        <%- end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="table-cell  relative">
+    <%- if call.alerts.present? %>
+      <div class="absolute -left-6 w-8">
+        <%= link_to account_alerts_path(@account, search: { search_all: call.sid }), title: pluralize(call.alerts.size, "alert"), data: { 'turbo-frame': "_top" }, class: "w-8 cursor-pointer" do %>
+          <%= image_tag "alert.svg", class: "stroke-orange-400" %>
+        <% end %>
+      </div>
+    <% end %>
+    <span class="p-1 rounded-sm text-xs <%= status_color(call.status) %>">
+      <%= call.status.titleize %>
+    </span>
+  </div>
+    <div class="table-cell ">
+      <% if call.conference %>
+
+        <%= link_to(
+                  highlight(call.conference.friendly_name, search.terms),
+                  account_calls_path(@account, search: { search_all: 'conference_name:"'+call.conference.friendly_name+'"' }),  
+                  data: { 'turbo-frame': "_top", 'link-to-search':  'conference_name:"'+call.conference.friendly_name+'"'},
+                  title:'Search calls of this conference')
+        %>
+ 
+           <div class="text-xs text-gray-500 text-xxs">
+              <%= link_to highlight_sid(call.conference.sid, search.terms), twilio_conference_url(call.conference), target: "_blank" , title:'Open conference in twilio'%>
+           </div>
+      <% end %>
+    </div>
+
+    <div class="table-cell ">
+      <span class="square" style="color:<%= call.twilio_account.color %>">■</span>
+      <%= highlight(call.twilio_account.name, search.terms) %>
+      <div class="text-xs text-gray-500 text-xxs "><%= link_to highlight_sid(call.sid, search.terms), twilio_call_url(call), target: "_blank" ,title:'Open call in twilio'%></div>
+    </div>
+
+</div>

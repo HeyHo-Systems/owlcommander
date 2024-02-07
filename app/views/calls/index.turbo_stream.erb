@@ -1,0 +1,7 @@
+<turbo-stream action="<%= action_for_page(@pagy) %>" target="calls-rows">
+  <template>
+    <%= render partial: 'calls/call', collection: @calls, locals: { search: @search }, formats: [:html] %>
+  </template>
+</turbo-stream>
+
+<%= render 'shared/infinite_scrolling' %>

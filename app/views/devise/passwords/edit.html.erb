@@ -1,0 +1,27 @@
+<%- content_for :under_box do %>
+  <%= render "devise/shared/links" %>
+<%- end %>
+
+<%= render 'shared/session_box', title: 'Change your password' do %>
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: 'form', 'data-turbo': 'false' }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <%= f.hidden_field :reset_password_token %>
+
+    <div>
+      <%= f.label :password, 'New password' %>
+      <%= f.password_field :password, autofocus: true, autocomplete: 'new-password', required: true %>
+      <% if @minimum_password_length %>
+        <em class="text-xs text-gray-500"><%= @minimum_password_length %> characters minimum</em>
+      <% end %>
+    </div>
+
+    <div>
+      <%= f.label :password_confirmation, 'Confirm new password' %>
+      <%= f.password_field :password_confirmation, autocomplete: 'new-password' %>
+    </div>
+
+    <div>
+      <%= f.submit 'Change my password' %>
+    </div>
+  <% end %>
+<% end %>

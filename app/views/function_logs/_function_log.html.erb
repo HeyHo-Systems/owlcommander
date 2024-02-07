@@ -1,0 +1,42 @@
+<div class="table-row" id="<%= dom_id function_log %>">
+  <div class="table-cell w-1/12">
+    <div class="text-gray-900 text-lg">
+      <%= format_time(function_log.date_created) %>
+      <div class="text-xs text-gray-500">
+        <%= format_date(function_log.date_created) %>
+      </div>
+    </div>
+  </div>
+  <div class="table-cell w-3/12">
+    <div class="text-gray-900" style="overflow-wrap: anywhere;">
+      <%= highlight(function_log.message, search.terms) %>
+    </div>
+  </div>
+  <div class="table-cell w-1/12">
+    <div class="text-gray-900">
+      <%= highlight(function_log.level, search.terms) %>
+    </div>
+  </div>
+  <div class="table-cell w-2/12">
+    <div class="text-gray-900">
+      <%= highlight(function_log.service_name, search.terms) %>
+      <div class="text-xs text-gray-500 text-xxs"><%= highlight(function_log.service_sid, search.terms) %></div>
+    </div>
+  </div>
+  <div class="table-cell w-2/12">
+    <div class="text-gray-900">
+      <%= link_to twilio_function_url(function_log.service_sid, function_log.environment_sid, function_log.function_sid), target: "_blank" do %>
+        <%= highlight(function_log.function_name, search.terms) %>
+      <% end %>
+      <div class="text-xs text-gray-500 text-xxs"><%= highlight(function_log.environment_name, search.terms) %></div>
+    </div>
+  </div>
+  <% if !@search.twilio_account_id.present? %>
+    <div class="table-cell w-2/12">
+
+      <span class="square" style="color:<%= function_log.twilio_account.color %>">■</span>
+      <%= highlight(function_log.twilio_account.name, search.terms) %>
+      <div class="text-xs text-gray-500 text-xxs"><%= highlight(function_log.sid, search.terms) %></div>
+    </div>
+  <% end %>
+</div>

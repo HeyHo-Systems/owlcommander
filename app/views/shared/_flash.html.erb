@@ -1,0 +1,19 @@
+<div class="max-w-screen-2xl mx-auto sm:px-6 lg:px-8">
+  <%- if notice.present? %>
+    <div class="py-4 lg:px-4">
+      <div class="w-full text-center p-2 bg-teal-50 items-center text-teal-400 leading-none lg:rounded" role="alert">
+        <span class="font-semibold"><%= notice %></span>
+      </div>
+    </div>
+  <%- end %>
+</div>
+
+<div class="max-w-screen-2xl mx-auto sm:px-6 lg:px-8">
+  <%- if alert.present? %>
+    <div class="text-center py-4 lg:px-4">
+      <div class="w-full text-center p-2 bg-red-50 items-center text-red-400 leading-none lg:rounded" role="alert">
+        <span class="font-semibold"><%= alert %></span>
+      </div>
+    </div>
+  <%- end %>
+</div>

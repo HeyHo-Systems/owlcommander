@@ -1,0 +1,19 @@
+
+
+<%= form_for(@account, html: { 'data-turbo': 'false', class: 'form centered' }) do |f| %>
+
+  <h1 class="text-xl font-normal text-gray-900 leading-tight ">Create a new team</h1>
+
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name, required: true, autofocus: true, maxlength: 25, autocomplete: 'organization' %>
+  <p class="text-xs text-gray-800 pt-0.5">The team name must be unique.</p>
+    <%= field_errors @account.errors[:name] %>
+  </div>
+
+  <div class="flex justify-between items-center">
+    <%= link_to "‹ cancel", root_path unless policy_scope(Account).empty?%>
+    <span></span>
+    <%= f.submit 'Create team' %>
+  </div>
+<% end %>

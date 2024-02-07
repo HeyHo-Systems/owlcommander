@@ -1,0 +1,43 @@
+<div class="table-row" id="<%= dom_id number %>">
+  <div class="table-cell w-2/7">
+    <div class="text-gray-900 text-base"><%= highlight(number.phone, search.terms) %></div>
+  </div>
+  <div class="table-cell w-2/7">
+    <div
+      class="text-gray-900 text-base cursor-text"
+      data-controller="inline-edit"
+      data-inline-edit-update-path="<%= account_number_path(@account, number) %>"
+      data-inline-edit-model="number"
+      data-inline-edit-name="name"
+      data-inline-edit-input-class="text-lg w-full -ml-3 -my-2 rounded border-2 border-sky-500 focus:ring-sky-500 focus:border-sky-500"
+      data-inline-edit-target="source"
+      data-inline-edit-value="<%= number.name %>"
+      data-action="click->inline-edit#edit"
+    >
+      <%= highlight(number.name, search.terms) %>
+    </div>
+  </div>
+  <div class="table-cell w-2/7">
+    <div class="text-gray-500 text-xxs">
+      <%- twilio_url_type(number.voice_url.to_s).tap do |type| %>
+        <%- if type.present? %>
+          <span class="px-1 py-0.5 mr-1 whitespace-nowrap rounded-sm text-xs font-semibold <%= twilio_url_color(number.voice_url) %>"><%= type %></span>
+        <%- end %>
+      <%- end %>
+
+      <span class="font-bold"><%= highlight(number.voice_method, search.terms) %></span>
+    </div>
+    <div style="overflow-wrap: anywhere;">
+      <%= highlight(number.voice_url, search.terms) %>
+    </div>
+  </div>
+  <div class="table-cell w-2/7">
+      <span class="square" style="color:<%= number.twilio_account.color %>">■</span>
+      <%= highlight(number.twilio_account.name, search.terms) %>
+      <div class="text-xs text-gray-500 text-xxs">
+        <%= link_to highlight_sid(number.sid, search.terms), twilio_phone_number_url(number), target: "_blank" %>
+      </div>
+
+    </div>
+
+</div>

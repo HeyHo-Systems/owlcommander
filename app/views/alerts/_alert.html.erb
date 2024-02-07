@@ -1,0 +1,50 @@
+<div class="table-row" id="<%= dom_id alert %>">
+  <div class="table-cell w-1/12">
+    <div class="text-gray-900 ">
+      <%= format_time(alert.twilio_created_at) %>
+      <div class="<%= alert.twilio_created_at.today? ? 'text-black font-bold ':'text-gray-500' %>">
+          <%= highlight(format_date(alert.twilio_created_at), search.terms) %>
+      </div>
+    </div>
+  </div>
+  <div class="table-cell w-4/12">
+    <div class="text-gray-900" style="overflow-wrap: anywhere;">
+      <%= highlight(alert.message, search.terms) %>
+    </div>
+  </div>
+  <div class="table-cell w-4/12">
+    <div class="text-gray-900">
+      <div class="text-gray-500 text-xxs">
+        <%- twilio_url_type(alert.request_url.to_s).tap do |type| %>
+          <%- if type.present? %>
+            <span class="px-1 py-0.5 mr-1 whitespace-nowrap rounded-sm text-xs font-semibold <%= twilio_url_color(alert.request_url) %>"><%= type %></span>
+          <%- end %>
+        <%- end %>
+
+        <span class="font-bold"><%= highlight(alert.request_method, search.terms) %></span>
+      </div>
+      <div style="overflow-wrap: anywhere;">
+        <%= highlight(clean_twilio_url(alert.request_url.to_s), search.terms) %>
+      </div>
+    </div>
+  </div>
+  <div class="table-cell w-1/12">
+    <div class="text-gray-900">
+      <%= link_to twilio_error_code_url(alert.error_code) do %>
+        <%= highlight(alert.error_code, search.terms) %>
+      <% end %>
+      <%- if alert.call.present? %>
+        <div><%= link_to("Call →", account_calls_path(@account, search: { search_all: "sid:#{alert.call.sid}" }), class: "bg-sky-200 text-sky-400 hover:text-sky-500 p-0.5 rounded-sm text-xxs", data: { 'turbo-frame': "_top" }) %></div>
+      <%- end %>
+    </div>
+  </div>
+
+    <div class="table-cell w-2/12">
+
+      <span class="square" style="color:<%= alert.twilio_account.color %>">■</span>
+      <%= highlight(alert.twilio_account.name, search.terms) %>
+      <div class="text-xs text-gray-500 text-xxs">
+        <%= link_to highlight_sid(alert.sid, search.terms), twilio_alert_url(alert), target: "_blank" %>
+    </div>
+    </div>
+</div>

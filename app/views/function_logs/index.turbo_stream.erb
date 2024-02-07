@@ -1,0 +1,7 @@
+<turbo-stream action="<%= action_for_page(@pagy) %>" target="function_logs-rows">
+  <template>
+    <%= render partial: 'function_logs/function_log', collection: @function_logs, locals: { search: @search }, formats: [:html] %>
+  </template>
+</turbo-stream>
+
+<%= render 'shared/infinite_scrolling' %>

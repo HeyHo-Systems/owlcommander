@@ -1,0 +1,19 @@
+ 
+<%= form_with  url: feedback_index_path, html: { 'data-turbo': 'false', class: 'form centered' } do |form| %>
+ 
+  <h1 class="text-xl font-normal text-gray-900 leading-tight ">
+    Your feedback on owl commander
+  </h1>
+
+<div> 
+    <%= form.label :feedback %>
+  <%= form.text_area :feedback, autofocus:"autofocus" , style:"width : 100%;" %> 
+</div>
+
+
+  <div class="flex justify-between items-center">  
+
+    <%= link_to "‹ cancel", root_path %>
+    <%= form.submit 'Save' %>
+  </div>
+<% end %>

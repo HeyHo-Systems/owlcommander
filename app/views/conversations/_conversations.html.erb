@@ -1,0 +1,31 @@
+<%= turbo_frame_tag "live-reloading-content", 'data-turbo-action' => "advance", 'target' => "_top" do %>
+  <% if @conversations.empty? %>
+    <div class="nothing-here">No result</div>
+  <% else %>
+    <div class="flex"   data-controller="arrowkeys">
+      <div style="flex-grow:1">
+
+        <div class="table full conversations">
+          <div class="table-header-group">
+            <div class="table-row">
+              <div class="table-cell"><%= sortable_header(:date_created, label: 'Time', search: search) %></div>
+ 
+              <div class="table-cell"><%= sortable_header(:state, label: 'Status', search: search) %></div>
+              <div class="table-cell"><%= sortable_header(:friendly_name, label: 'Friendly name', search: search) %></div>
+
+              <div class="table-cell"><%= sortable_header(:'messages_count', label: 'Messages', search: search) %></div>
+              <div class="table-cell"><%= sortable_header(:'twilio_accounts.name', label: 'Account & SID', search: search) %></div>
+            </div>
+          </div>
+          <div class="table-row-group" id="conversations-rows">
+            <%= render partial: 'conversations/conversation', collection: @conversations, locals: { search: search } %>
+          </div>
+        </div>
+
+        <%= render 'shared/infinite_scrolling', pagy: @pagy %>
+      </div>
+      <%= render 'conversations/messages', conversation: @selected, search: @search %>
+    </div>
+  <%- end %>
+
+<%- end %>
