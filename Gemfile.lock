@@ -81,6 +81,7 @@ GEM
       bundler (>= 1.2.0, < 3)
       thor (~> 1.0)
     concurrent-ruby (1.2.3)
+    connection_pool (2.4.1)
     crass (1.0.6)
     cssbundling-rails (1.4.0)
       railties (>= 6.0.0)
@@ -239,7 +240,10 @@ GEM
     rake (13.1.0)
     rdoc (6.6.2)
       psych (>= 4.0.0)
-    redis (4.8.1)
+    redis (5.0.8)
+      redis-client (>= 0.17.0)
+    redis-client (0.19.1)
+      connection_pool
     regexp_parser (2.9.0)
     reline (0.4.2)
       io-console (~> 0.5)
@@ -353,7 +357,7 @@ DEPENDENCIES
   pundit
   pundit-matchers
   rails (~> 7.0.3)
-  redis (~> 4.7)
+  redis (~> 5.0)
   rollbar
   rspec-rails
   rubocop
