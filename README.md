@@ -35,6 +35,7 @@ To ensure the security of your Twilio API key secrets, they are encrypted in the
 # Roadmap
 
 - Include Twilio SMS
+- REST API (connect other clients to Owl)
 - Include further Twilio API endpoints
 - Serverless function logs
 - AI Data monitoring (alert when your twilio usage is very different from normal)
