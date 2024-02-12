@@ -24,7 +24,7 @@
         "generator": "secret"
     },
     "SENDGRID_API_KEY":{
-      "description": "Set this if you want to use an existing sendgrid addon",
+      "description": "To send invitation emails and password resets, you can add the sendgrid addon or set a SENDGRID_API_KEY here.",
       "required":false
     },
     "SLACK_FEEDBACK_URL":{
