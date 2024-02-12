@@ -1,38 +1,48 @@
 {
   "name": "Owl Commander",
   "description": "Open source third party administration UI for Twilio",
-  "repository": "https://github.com/HeyHo-Systems/owlcommander",
-  "logo": "https://github.com/HeyHo-Systems/owlcommander/assets/3457214/24c276b6-3d35-4ed2-9a10-6242f16dbb08",
   "keywords": [
     "rails",
     "twilio",
     "admin"
   ],
-  "addons": [
-    "heroku-postgresql",
-    "sendgrid"
-  ],
-  "buildpacks": [
-    {
-      "url": "heroku/ruby"
-    }
-  ],
-  "env": {
-    "ENCRYPTION_PRIMARY_KEY": {
-      "description": "You can generate a custom value by running 'bin/rails db:encryption:init'",
-      "value": "vPXqLywkqeo2Ppjv5vwcEgpHblle6stA"
-    },
-    "ENCRYPTION_DETERMINISTIC_KEY": {
-      "description": "You can generate a custom value by running 'bin/rails db:encryption:init'",
-      "value": "Nm80hHgXaeGZ1CpAuy73h9qRjF46lmLm"
-    },
-    "ENCRYPTION_KEY_DERIVATION_SALT": {
-      "description": "You can generate a custom value by running 'bin/rails db:encryption:init'",
-      "value": "3xwxIGLqwuOP1n3XVuzG4KY8zBpyRle0"
-    },
-  },
+  "website":"https://owlcommander.com/",
+  "repository": "https://github.com/HeyHo-Systems/owlcommander",
+  "logo": "https://i.imgur.com/VVu9HHl.png",
+  "success_url": "/", 
   "scripts": {
     "postdeploy": ""
   },
-  "success_url": "/"
+  "env": {
+    "ENCRYPTION_PRIMARY_KEY": {
+        "generator": "secret"
+    },
+    "ENCRYPTION_DETERMINISTIC_KEY": { 
+        "generator": "secret"
+    },
+    "ENCRYPTION_KEY_DERIVATION_SALT": {
+        "generator": "secret"
+    },
+    "SENDGRID_API_KEY":{
+      "description": "Set this if you want to use an existing sendgrid addon",
+      "required":false
+    },
+    "SLACK_FEEDBACK_URL":{
+      "description": "Setting this to a slack webhook url will enable the feedback form",
+      "required":false
+    }
+  },  
+  "image": "heroku/ruby",
+  "addons": [
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    },  {
+      "url": "heroku/ruby"
+    }
+  ] ,"scripts": {
+    "postdeploy": "rails db:schema:load"
+  }
 }

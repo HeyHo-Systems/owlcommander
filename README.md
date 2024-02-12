@@ -26,11 +26,9 @@ This Beta version is intended for testing and feedback purposes. Users are encou
 
 Understanding the importance of keeping Twilio __data secure and confidential__, we've simplified the process for hosting your own instance of Owl Commander. The most straightforward method is deploying the application on Heroku. With just a few clicks using the button below, the application can be set up on Heroku.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/HeyHo-Systems/owl_commander)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/HeyHo-Systems/owlcommander/tree/main)
 
-For email functionality, including sending invitation and password reset emails, the application utilizes the SendGrid add-on. Additionally, a version of PostgreSQL is required to store application data.
-
-To ensure the security of your Twilio API key secrets, they are encrypted in the database. This measure prevents the potential misuse of Twilio data from database dumps. For setting up encryption keys and configuring environment variables for enhanced security, consider cloning the repository and following the local __Development Setup__ instructions provided below.
+For email functionality, including sending invitation and password reset emails, the application utilizes the SendGrid add-on. Go to https://tools.heroku.support/addons-verification and verify your heroku account beforehand. Additionally, a version of PostgreSQL is required to store application data. 
 
 # Roadmap
 
