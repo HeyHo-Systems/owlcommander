@@ -44,5 +44,13 @@
     }
   ] ,"scripts": {
     "postdeploy": "rails db:schema:load"
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    },
+    "worker": {
+      "quantity": 1
+    }
   }
 }
