@@ -1,6 +1,6 @@
 # Owl Commander: Your Convenient Twilio Monitoring Companion
 
-Welcome to Owl Commander, an innvoative open-source solution for logging and monitoring your data, featuring a beautifyl UI and tailored to enhance your Twilio experience.
+Welcome to Owl Commander, an innvoative open-source solution for logging and monitoring your data, featuring a beautyful UI and tailored to enhance your Twilio experience.
 
 ### About Owl Commander
 
