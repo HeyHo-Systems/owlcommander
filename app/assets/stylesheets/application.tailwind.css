@@ -355,9 +355,8 @@ nav#main-navigation .menu {
         text-align: center;
     }
     & #presentation p{
-        opacity: 0.5; 
-    font-size: .875rem;
-    line-height: 1.25rem;
+
+    line-height: 1.45rem;
     }
 }
 

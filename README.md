@@ -28,7 +28,8 @@ Understanding the importance of keeping Twilio __data secure and confidential__,
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/HeyHo-Systems/owlcommander/tree/main)
 
-For email functionality, including sending invitation and password reset emails, the application utilizes the SendGrid add-on. Go to https://tools.heroku.support/addons-verification and verify your heroku account beforehand. Additionally, a version of PostgreSQL is required to store application data. 
+For email functionality, including sending invitation and password reset emails, the application utilizes the SendGrid add-on. 
+Additionally, a version of PostgreSQL is required to store application data. 
 
 # Roadmap
 
@@ -129,7 +130,7 @@ HeyHo Systems focuses on developing tools and solutions designed to support the 
 
 For more information about us and our projects, visit our website at [heyhosystems.com](https://heyhosystems.com).
 
-Connect with us on LinkedIn to stay updated on our latest developments and opportunities: [HeyHo Systems on LinkedIn](https://www.linkedin.com/company/heyho-systems/mycompany).
+Connect with us on LinkedIn to stay updated on our latest developments and opportunities: [HeyHo Systems on LinkedIn](https://www.linkedin.com/company/heyho-systems/).
 
 ### Engage with Us
 
