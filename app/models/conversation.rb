@@ -54,12 +54,12 @@ class Conversation < ApplicationRecord
   end
 
   def self.pull_messages(item, twilio_account)
-    messages = twilio_account.client.conversations.v1.conversations(item.sid).messages
-                             .list(limit: 100)
-                             .map { |m| { author: m.author, time: m.date_created, body: m.body } }
-    messages_content = messages.map { |m| "#{m[:author]} #{m[:body]}" }.join(' ')
-    { messages:,
+    messages_list = twilio_account.client.conversations.v1.conversations(item.sid).messages
+                                  .list(limit: 100)
+                                  .map { |m| { author: m.author, time: m.date_created, body: m.body } }
+    messages_content = messages_list.map { |m| "#{m[:author]} #{m[:body]}" }.join(' ')
+    { messages_list:,
       messages_content:,
-      messages_count: messages.count }
+      messages_count: messages_list.count }
   end
 end

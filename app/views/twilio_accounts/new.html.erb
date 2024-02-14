@@ -15,13 +15,13 @@
 
   <div class="mt-6">
     <%= f.label :account_sid, 'Account SID' %>
-    <%= f.text_field :account_sid, required: true, autocomplete: false %>
+    <%= f.text_field :account_sid, required: true, autocomplete: 'off' %>
     <%= field_errors @twilio_account.errors[:account_sid] %>
   </div>
 
   <div class="mt-6">
     <%= f.label :auth_token %>
-    <%= f.password_field :auth_token, required: true, autocomplete: false %>
+    <%= f.text_field :auth_token, required: true, autocomplete: 'off' %>
     <%= field_errors @twilio_account.errors[:auth_token] %>
   </div>
 

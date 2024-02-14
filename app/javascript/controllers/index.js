@@ -11,6 +11,7 @@ import RowClickController from "./rowclick_controller"
 import ArrowKeyController from "./arrowkeys_controller"
 import ConfirmController from "./confirm_controller"
 import DropDownController from "./dropdown_controller"
+import ClickToCopyController from "./click_to_copy_controller"
 
 application.register("infinite-scroll", InfiniteScrollController)
 application.register("inline-edit", InlineEditController)
@@ -19,3 +20,4 @@ application.register("rowclick", RowClickController)
 application.register("arrowkeys", ArrowKeyController)
 application.register("confirm", ConfirmController)
 application.register("dropdown", DropDownController)
+application.register("click-to-copy", ClickToCopyController)

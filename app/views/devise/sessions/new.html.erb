@@ -12,7 +12,10 @@
       <%= f.label :password do %>
         <div class="flex justify-between items-center">
           <span>Password</span>
-          <%= link_to "Forgot your password?", new_password_path(resource_name), class: "font-medium" %></div>
+          <%- if ENV['SENDGRID_API_KEY'].present? %>
+            <%= link_to "Forgot your password?", new_password_path(resource_name), class: "font-medium" %>
+          <%- end %>
+          </div>
       <% end %>
       <%= f.password_field :password, autocomplete: 'current-password', required: true %>
     </div>

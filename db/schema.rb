@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_17_074838) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_14_075706) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -121,6 +121,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_17_074838) do
     t.jsonb "messages", null: false
     t.integer "messages_count", null: false
     t.string "messages_content"
+    t.json "messages_list"
     t.index ["twilio_account_id"], name: "index_conversations_on_twilio_account_id"
   end
 
