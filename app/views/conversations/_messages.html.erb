@@ -1,7 +1,7 @@
 <div class=" messages-list" >
 
   <% if conversation %>
-    <% conversation.messages_list.each do |message| %>
+    <% conversation.messages.each do |message| %>
       <div style="margin-bottom:20px">
         <div class="text-xs font-bold text-gray-800" title="Sent <%= message['time'] %>"><%= highlight(message['author'], @search.terms) %></div>
         <div><%= highlight(message['body'], @search.terms) %></div>

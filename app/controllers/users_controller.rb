@@ -12,11 +12,6 @@ class UsersController < AuthenticatedController
 
   def create
     create_user
-    if @user.blank?
-      skip_authorization
-      redirect_to new_account_user_path(@account), alert: "Could not find user with email #{user_params[:email]}"
-      return
-    end
     create_membership
     if @user.save && @membership.save
       @user.send_reset_password_instructions unless @existing_user
@@ -54,11 +49,11 @@ class UsersController < AuthenticatedController
       @user = @existing_user
       authorize @user, :show?
       @notice = I18n.t('team.members.existing_user_added', user: @user.name_or_email, team: @account.name)
-    elsif ENV['SENDGRID_API_KEY'].present?
+    else
       @user = User.new(user_params.merge(password: SecureRandom.hex(16), created_by_id: current_user.id))
       authorize @user, :create?
       @notice = I18n.t('team.members.created_user_added', user: @user.name_or_email, team: @account.name)
-    end 
+    end
   end
 
   def create_membership

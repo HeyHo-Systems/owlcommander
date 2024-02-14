@@ -5,24 +5,18 @@
     New member
   </h1>
 
-    <%- if ENV['SENDGRID_API_KEY'].present? %>
-    <div>
-      <%= f.label :name %>
-      <%= f.text_field :name, autofocus: true %>
-      <%= field_errors @user.errors[:name] %>
-    </div>
-   <%- end %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name, autofocus: true %>
+    <%= field_errors @user.errors[:name] %>
+  </div>
+
   <div>
     <%= f.label :email %>
     <%= f.email_field :email, autocomplete: "none", required: true %>
     <%= field_errors @user.errors[:email] %>
-
-    <%- if ENV['SENDGRID_API_KEY'].present? %>
-      <p class="text-xs text-gray-800 pt-0.5">The user will be created, added to the team and invited to set a password by email. If there's already a user with that email we'll immediately add them to your team.</p>
-   <%- else %>
-       <p class="text-xs text-gray-800 pt-0.5">Please type the email adress of a user that already signed up.</p>
-   <%- end %>
-
+    <p class="text-xs text-gray-800 pt-0.5">If there's already a user with that email we'll immediately add them to your
+      team.</p>
   </div>
 
   <div class="flex justify-between items-center">
