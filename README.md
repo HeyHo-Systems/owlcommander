@@ -80,8 +80,7 @@ Run `yarn start` and visit <http://localhost:3000>.
 ### Before pushing changes
 
 ```bash
-npm update
-bundle update
+yarn upgrade && bundle update
 bin/rake spec RAILS_ENV=test
 bin/bundler-audit --update
 bin/brakeman -q -w2
