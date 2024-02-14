@@ -2,9 +2,8 @@
 
 class UserPolicy < ApplicationPolicy
   def show?
-    return false if user.blank?
-
-    user.colleagues.exists?(record.id) || superuser?
+    # You can add anyone to your team, so you need to be able to "see" them
+    user.present?
   end
 
   def new?
