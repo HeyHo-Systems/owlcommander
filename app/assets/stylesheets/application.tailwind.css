@@ -403,3 +403,42 @@ a.feedback {
     transform: translate(24px,0) rotate(90deg);
     padding: 0 11px;
 }
+
+#big-buttons{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 60px;
+    gap: 20px;
+   
+    #see-on-github{
+        background: #222;
+    &:hover{
+        background: #111;
+    } 
+    }
+    #deploy-to-heroku{
+        background: #3b2f63;
+        &:hover{
+            background: #282045;
+        }  
+    }
+} 
+#big-buttons  a{
+        white-space: nowrap;
+        display: inline-flex;
+        box-shadow: 0 -5px 0 inset #00000033;
+        color: white;
+        line-height: 30px;
+        align-items: center;
+        padding:  10px;
+        gap: 10px;
+        border-radius: 4px;
+        font-weight: bold;
+        text-align: center;  
+    }   
+
+#big-buttons  a svg{
+    width: 30px;
+    height: 30px;
+}
