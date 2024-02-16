@@ -197,7 +197,7 @@ GEM
     parser (3.3.0.5)
       ast (~> 2.4.1)
       racc
-    pg (1.5.4)
+    pg (1.5.5)
     polyglot (0.3.5)
     propshaft (0.8.0)
       actionpack (>= 7.0.0)
@@ -367,7 +367,7 @@ DEPENDENCIES
   jsbundling-rails
   matrix
   pagy
-  pg (~> 1.4)
+  pg (~> 1.5)
   propshaft
   puma (~> 6.0)
   pundit
