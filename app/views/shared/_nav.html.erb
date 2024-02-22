@@ -47,6 +47,7 @@
         <%= nav_link "Numbers", account_numbers_path(@account) if policy(:number).index? %>
         <%= nav_link "Alerts", account_alerts_path(@account) if policy(:number).index? %>
         <%= nav_link "Conversations", account_conversations_path(@account) %>
+        <%= nav_link "Serverless", account_function_logs_path(@account) %>
       <%- end %>
 
       <div class="spacer"></div>
