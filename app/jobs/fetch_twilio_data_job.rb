@@ -6,7 +6,7 @@ class FetchTwilioDataJob < ApplicationJob
   # fetch_logs disabled for now
   METHODS = %i[fetch_lines fetch_calls fetch_conferences fetch_alerts fetch_conversations].freeze
 
-  def perform
+  def perform # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     TwilioAccount.find_each do |twilio_account|
       last_run_failed = twilio_account.last_pull_status == 'error'
       twilio_account.update(last_pull_status: 'pulling', last_pull_start: Time.zone.now, last_pull_end: nil)
@@ -16,7 +16,11 @@ class FetchTwilioDataJob < ApplicationJob
       rescue StandardError => e
         error = e
         if last_run_failed
-          Rollbar.error "Pulling #{method_name} for account #{twilio_account.name} failed", { method_name:, twilio_account_id: twilio_account.id }, e
+          last_rollbar_report = Rails.cache.fetch("last_rollbar_report_#{twilio_account.id}")
+          if last_rollbar_report.nil? || Time.zone.now - last_rollbar_report > 1.hour
+            Rollbar.error "Pulling #{method_name} for account #{twilio_account.name} failed", { method_name:, twilio_account_id: twilio_account.id }, e
+            Rails.cache.write("last_rollbar_report_#{twilio_account.id}", Time.zone.now)
+          end
         else
           Rails.logger.warn { "Pulling #{method_name} for account #{twilio_account.name} failed, this happens when twilio is unreachabe. " }
         end
