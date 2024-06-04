@@ -1,6 +1,8 @@
 <div class="table-row" id="<%= dom_id number %>">
   <div class="table-cell w-2/7">
-    <div class="text-gray-900 text-base"><%= highlight(number.phone, search.terms) %></div>
+    <div class="text-gray-900 text-base"
+     title="Click to copy the phone number"
+     data-click-to-copy><%= highlight(number.phone, search.terms) %></div>
   </div>
   <div class="table-cell w-2/7">
     <div

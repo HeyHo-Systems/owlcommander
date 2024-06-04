@@ -16,7 +16,7 @@
           <span class="text-xs text-gray-500"><%= highlight(call.friendly_direction, search.terms) %></span>
         </div>
       <%- else %>
-        <%= highlight(call.from_phone, search.terms) %>
+        <div data-click-to-copy title="Click to copy the from number"><%= highlight(call.from_phone, search.terms) %></div>
         <div class="text-gray-500 text-xs"><%= highlight(call.friendly_direction, search.terms) %><%= call.from_number&.name %></div>
       <%- end %>
     </div>
@@ -29,7 +29,7 @@
           <%= highlight(call.to_phone, search.terms) %>
         </div>
       <%- else %>
-        <%= highlight(call.to_phone, search.terms) %>
+        <div data-click-to-copy title="Click to copy the to number"><%= highlight(call.to_phone, search.terms) %></div>
         <div class="text-xs text-gray-500"><%= highlight(call.to_number&.name.to_s, search.terms) %></div>
       <%- end %>
     </div>

@@ -442,3 +442,55 @@ a.feedback {
     width: 30px;
     height: 30px;
 }
+
+
+
+
+/*CLICK TO COPY */
+
+*[data-click-to-copy]{
+    cursor: copy;
+}
+*[data-click-to-copy].copied{
+    outline:2px solid ;
+    animation:copied 1.5s forwards;
+    border-radius: 5px 5px 0 0 ;
+}
+.toast-after-copy {
+    pointer-events: none;
+    position: fixed;
+    background: #0ea5e9;
+    outline: 2px solid  #0ea5e9;
+    text-align: center;
+    animation:pop 1.5s forwards;
+    color:white;
+    border-radius: 0 0 5px 5px;
+    font-size: 10px;
+}
+@keyframes copied{
+       0%{
+     outline-color: transparent;
+    }
+
+    10%, 90%{
+        outline-color: #0ea5e9;
+    }
+      100%{
+     outline-color: transparent;
+    }
+}
+@keyframes pop{
+    0%{
+        opacity:0;
+        transform:translate(0, -5px);
+    }
+
+    10%, 90%{
+        opacity:1;
+        transform:none;
+    }
+      100%{
+        opacity:0;
+        transform:translate(0, 5px);
+    }
+}
