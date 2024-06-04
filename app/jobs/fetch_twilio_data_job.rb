@@ -73,7 +73,7 @@ class FetchTwilioDataJob < ApplicationJob
     end
 
     # Remove numbers leftover from previous sync, that have been released
-    TwilioNumber
+    Number
       .where(twilio_account_id: twilio_account.id)
       .where.not(last_synced:)
       .destroy_all
@@ -86,7 +86,6 @@ class FetchTwilioDataJob < ApplicationJob
       )
     end
   end
-
   # def fetch_logs(twilio_account)
   #   if twilio_account.service_environments.any?
   #     Rails.logger.info { "Fetching logs for TWILIO ACCOUNT #{twilio_account.name}" }
