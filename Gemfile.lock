@@ -362,6 +362,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   brakeman
+  bundler (~> 2.5)
   bundler-audit
   cssbundling-rails
   daemons (~> 1.4)
@@ -399,4 +400,4 @@ RUBY VERSION
    ruby 3.1.2p20
 
 BUNDLED WITH
-   2.3.7
+   2.5.11
