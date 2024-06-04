@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class TwilioNumber
-  def initialize(twilio_api_number:, twilio_account:)
+  def initialize(twilio_api_number:, twilio_account:, last_synced:)
     @twilio_account = twilio_account
     @twilio_api_number = twilio_api_number
+    @last_synced = last_synced
   end
 
   delegate :id, to: :twilio_account, prefix: true
@@ -49,11 +50,12 @@ class TwilioNumber
       sms_fallback_method:,
       twilio_created_at: date_created,
       twilio_updated_at: date_updated,
-      twilio_account_id: twilio_account.id
+      twilio_account_id: twilio_account.id,
+      last_synced:
     }
   end
 
   private
 
-  attr_reader :twilio_account, :twilio_api_number
+  attr_reader :twilio_account, :twilio_api_number, :last_synced
 end

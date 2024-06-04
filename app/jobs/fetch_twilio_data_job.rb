@@ -65,11 +65,18 @@ class FetchTwilioDataJob < ApplicationJob
   end
 
   def fetch_lines(twilio_account)
+    last_synced = Time.zone.now
     twilio_account.client.incoming_phone_numbers.list.each do |twilio_api_number|
       Number.upsert_from_twilio(
-        TwilioNumber.new(twilio_account:, twilio_api_number:)
+        TwilioNumber.new(twilio_account:, twilio_api_number:, last_synced:)
       )
     end
+
+    # Remove numbers leftover from previous sync, that have been released
+    TwilioNumber
+      .where(twilio_account_id: twilio_account.id)
+      .where.not(last_synced:)
+      .destroy_all
   end
 
   def fetch_alerts(twilio_account)
