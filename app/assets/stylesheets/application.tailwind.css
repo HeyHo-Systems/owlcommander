@@ -448,8 +448,30 @@ a.feedback {
 
 /*CLICK TO COPY */
 
+*[data-click-to-copy]:after{
+    content: "";
+    background:  url(/copy.png);
+    background-size: contain;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin-left: 5px;
+    position: relative;
+    top: 2px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+
+*[data-click-to-copy]:focus:after,
+*[data-click-to-copy]:hover:after{
+
+    opacity: 0.5;
+}
 *[data-click-to-copy]{
-    cursor: copy;
+    cursor: pointer;
+    display: inline-block;
+    white-space: nowrap;
 }
 *[data-click-to-copy].copied{
     outline:2px solid ;
