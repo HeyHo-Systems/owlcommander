@@ -1,31 +1,23 @@
+let timeout = null
 
 // Click to copy interraction
-function clearToast(){
-    document.getElementById('copied-toast')?.remove()
+function clearCopiedClass() {
     document.querySelector('*[data-click-to-copy].copied')?.classList.remove('copied')
-
+    clearTimeout(timeout)
 }
-document.addEventListener('scroll',clearToast)
-document.addEventListener('click', (e) =>{
-    clearToast()
-    if(e.target.hasAttribute('data-click-to-copy')){
+
+document.addEventListener('scroll', clearCopiedClass)
+document.addEventListener('click', (e) => {
+    clearCopiedClass()
+    if (e.target.hasAttribute('data-click-to-copy')) {
         e.preventDefault();
         e.stopPropagation()
         try {
             navigator.clipboard.writeText(e.target.textContent)
-            const toast=document.createElement('div')
-            toast.innerText="copied"
-            toast.id="copied-toast"
-            toast.classList.add('toast-after-copy')
-            const {left, top, width, height} = e.target.getBoundingClientRect()
-            Object.assign(toast.style, {
-                left:left+'px',top:top+height+'px', width:width+'px'
-            })
-            document.body.appendChild(toast)
             e.target.classList.add('copied')
-            setTimeout(clearToast, 3000)
-        }catch (e){
-            alert(`Your browser doesn't seem to support copy events : ${e.message}` )
+            timeout = setTimeout(clearCopiedClass, 1000)
+        } catch (e) {
+            alert(`Your browser doesn't seem to support copy events : ${e.message}`)
         }
     }
 }, true)
