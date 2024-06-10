@@ -20,7 +20,8 @@ TwilioApiNumber = Struct.new(
   :sms_fallback_url,
   :sms_fallback_method,
   :date_created,
-  :date_updated
+  :date_updated,
+  :status
 )
 
 FactoryBot.define do
@@ -45,6 +46,7 @@ FactoryBot.define do
     sms_fallback_method { 'POST' }
     date_created { Time.zone.today }
     date_updated { Time.zone.today }
+    status { 'in-use' }
 
     skip_create
   end

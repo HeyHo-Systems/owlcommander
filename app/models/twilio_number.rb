@@ -28,6 +28,7 @@ class TwilioNumber
            :sms_fallback_method,
            :date_created,
            :date_updated,
+           :status,
            to: :twilio_api_number
 
   def attributes_for_number # rubocop:disable Metrics/MethodLength
@@ -51,7 +52,8 @@ class TwilioNumber
       twilio_created_at: date_created,
       twilio_updated_at: date_updated,
       twilio_account_id: twilio_account.id,
-      last_synced:
+      last_synced:,
+      status:
     }
   end
 

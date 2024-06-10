@@ -33,13 +33,17 @@
       <%= highlight(number.voice_url, search.terms) %>
     </div>
   </div>
+
+  <div class="table-cell w-2/7">
+    <%= highlight(number.status, search.terms) %>
+  </div>
+
   <div class="table-cell w-2/7">
       <span class="square" style="color:<%= number.twilio_account.color %>">■</span>
       <%= highlight(number.twilio_account.name, search.terms) %>
       <div class="text-xs text-gray-500 text-xxs">
         <%= link_to highlight_sid(number.sid, search.terms), twilio_phone_number_url(number), target: "_blank" %>
       </div>
-
     </div>
 
 </div>

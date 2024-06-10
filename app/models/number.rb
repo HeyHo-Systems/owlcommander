@@ -16,6 +16,7 @@ class Number < ApplicationRecord
   scope :search_name, ->(q) { ilike(name: q) }
   scope :search_sid, ->(q) { ilike_prefix(sid: q) }
   scope :search_voice_url, ->(q) { ilike(voice_url: q) }
+  scope :search_status, ->(q) { ilike(status: q) }
   scope :search_twilio_account_id, ->(id) { where(twilio_account_id: id) }
   scope :search_account_name, ->(q) { where(twilio_account_id: TwilioAccount.search_name(q)) }
 
@@ -27,6 +28,7 @@ class Number < ApplicationRecord
       .or(scope.search_sid(term))
       .or(scope.search_voice_url(term))
       .or(scope.search_account_name(term))
+      .or(scope.search_status(term))
   end
 
   def self.search(terms)

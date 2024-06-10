@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_17_074838) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_10_092815) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -192,6 +192,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_17_074838) do
     t.datetime "twilio_updated_at", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status"
     t.index ["name"], name: "index_numbers_on_name_gin_trgm_ops", opclass: :gin_trgm_ops, using: :gin
     t.index ["phone"], name: "index_numbers_on_phone_gin_trgm_ops", opclass: :gin_trgm_ops, using: :gin
     t.index ["twilio_account_id", "sid"], name: "index_numbers_on_twilio_account_id_and_sid", unique: true

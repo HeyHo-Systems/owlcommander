@@ -446,7 +446,7 @@ a.feedback {
 
 
 
-/*CLICK TO COPY */ 
+/*CLICK TO COPY */
 *[data-click-to-copy]{
     cursor: pointer;
     display: inline-block;

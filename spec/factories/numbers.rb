@@ -19,6 +19,7 @@ FactoryBot.define do
     sms_method { 'POST' }
     sms_fallback_url { random_callback_url(:sms_fallback) }
     sms_fallback_method { 'POST' }
+    status { 'in-use' }
     last_synced { Time.zone.now }
     twilio_created_at { Time.zone.now }
     twilio_updated_at { Time.zone.now }
