@@ -453,9 +453,11 @@ a.feedback {
     position: relative;
 
 }
+
 *[data-click-to-copy].copied{
     border-radius: 5px 5px 0 5px ;
 }
+
 *[data-click-to-copy].copied:after{
     content: "Copied";
     position: absolute;
@@ -466,9 +468,8 @@ a.feedback {
     line-height: 16px;
     border-radius: 0px 0px 5px 5px ;
 }
-
 *[data-click-to-copy].copied,
 *[data-click-to-copy].copied:after{
-    background: #d1ecff;
-    color: #0ea5e9;
+    background: #e3e3e3;
+    color: #1a1a1a;
 }
