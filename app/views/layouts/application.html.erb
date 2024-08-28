@@ -6,9 +6,12 @@
   <%= favicon_link_tag 'barn-owl.png' %>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
-
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+
+  <!-- Cookie Consent and Tag Manager for Analytics-->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
   <%= javascript_include_tag "google_tag_manager" %>
 </head>
 
